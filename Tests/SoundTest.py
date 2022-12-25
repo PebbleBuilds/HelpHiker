@@ -1,2 +1,7 @@
-from subprocess import call
-call(["aplay", "../bb8-sounds/bb8-03.mp3"])
+import pygame
+
+pygame.mixer.init()
+pygame.mixer.music.load("../bb8-sounds/bb8-05.mp3")
+pygame.mixer.music.play()
+while pygame.mixer.music.get_busy() == True:
+    continue
