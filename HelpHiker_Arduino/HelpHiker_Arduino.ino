@@ -2,7 +2,7 @@
 #include <std_msgs/Empty.h>
 #include <std_msgs/String.h>
 #include <std_msgs/Bool.h>
-#include <geometry_msgs/Vector2.h>
+#include <geometry_msgs/Vector3.h>
 #include <math.h>
 
 #include "Sweeper.h"
@@ -55,11 +55,11 @@ void driver_waving_cb( const std_msgs::Bool& driver_waving_msg){
 }
 ros::Subscriber<std_msgs::Bool> sub_driver_waving("driver_waving", &driver_waving_cb);
 
-void motors_cb( const geometry_msgs::Vector2& motor_msg){
-    motor1.Write(motor_msg.data.x);
-    motor2.Write(motor_msg.data.y);
+void motors_cb( const geometry_msgs::Vector3& motor_msg){
+    motor1.Write(motor_msg.x);
+    motor2.Write(motor_msg.y);
 }
-ros::Subscriber<geometry_msgs::Vector2> sub_motor_values("motors", &motors_cb)
+ros::Subscriber<geometry_msgs::Vector3> sub_motors("motors", &motors_cb);
 
 // Initialize publishers
 std_msgs::String chatter_msg;
@@ -87,6 +87,7 @@ void setup()
     // Motors
     motor1.Setup();
     motor2.Setup();
+    nh.subscribe(sub_motors);
 }
 
 /////////////////////////////
