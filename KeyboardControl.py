@@ -16,6 +16,7 @@ def main():
     # initialising pygame
     pygame.init()
     pygame.display.init()
+    pygame.event.set_grab()
 
     # ROS stuff
     motor_pub = rospy.Publisher('motors', Vector3, queue_size=10)
@@ -52,10 +53,15 @@ def main():
             waving_pub.publish(True)
         if keys[pygame.K_x]:
             waving_pub.publish(False)
+        if keys[pygame.K_q]:
+            pygame.quit()
+            sys.exit()
 
         
         if(key_is_down):
             print("A key has been pressed")
+        else:
+            print("No key pressed")
 
         # creating a loop to check events that
         # are occurring
