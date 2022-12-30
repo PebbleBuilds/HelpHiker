@@ -4,13 +4,18 @@ import rospy
 from std_msgs.msg import Bool
 from geometry_msgs.msg import Vector3
 
+import os
+
 def main():
+    os.environ['SDL_VIDEODRIVER'] = 'dummy'
+
     # define internal variables
     lin_speed = 100
     ang_speed = 100
 
     # initialising pygame
     pygame.init()
+    pygame.display.init()
 
     # ROS stuff
     motor_pub = rospy.Publisher('motors', Vector3, queue_size=10)
