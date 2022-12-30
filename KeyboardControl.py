@@ -14,7 +14,7 @@ def main():
 
     # ROS stuff
     motor_pub = rospy.Publisher('motors', Vector3, queue_size=10)
-    waving_pub = rospy.Publisher('driver_waving', bool, queue_size=10)
+    waving_pub = rospy.Publisher('driver_waving', Bool, queue_size=10)
     rospy.init_node('keyboard_control', anonymous=True)
     rate = rospy.Rate(50) # 50hz
     
