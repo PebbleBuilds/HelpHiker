@@ -11,9 +11,6 @@ def main():
 
     # initialising pygame
     pygame.init()
-    
-    # creating display
-    display = pygame.display.set_mode((300, 300))
 
     # ROS stuff
     motor_pub = rospy.Publisher('motors', Vector3, queue_size=10)
