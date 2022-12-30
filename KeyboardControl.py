@@ -10,8 +10,7 @@ def main():
     os.environ['SDL_VIDEODRIVER'] = 'dummy'
 
     # define internal variables
-    lin_speed = 100
-    ang_speed = 100
+    speed = 255
 
     # initialising pygame
     pygame.init()
@@ -27,49 +26,45 @@ def main():
     
     # creating a running loop
     while not rospy.is_shutdown():
-
-        # if no keys down, send x = 0, y = 0
-        left_motor = 0
-        right_motor = 0
-        key_is_down = False
-
-        keys = pygame.key.get_pressed()
-        if keys[pygame.K_LEFT]:
-            left_motor -= speed
-            right_motor += speed
-            key_is_down = True
-        if keys[pygame.K_RIGHT]:
-            left_motor += speed
-            right_motor -= speed
-            key_is_down = True
-        if keys[pygame.K_UP]:
-            left_motor += speed
-            right_motor += speed
-            key_is_down = True
-        if keys[pygame.K_DOWN]:
-            left_motor -= speed
-            right_motor -= speed
-            key_is_down = True
-        if keys[pygame.K_z]:
-            waving_pub.publish(True)
-        if keys[pygame.K_x]:
-            waving_pub.publish(False)
-        if keys[pygame.K_q]:
-            pygame.quit()
-            sys.exit()
-
-        
-        if(key_is_down):
-            print("A key has been pressed")
-        else:
-            print("No key pressed")
-
         # creating a loop to check events that
         # are occurring
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
+
+            if event.type == pygame.KEYDOWN:
+                if event.key = pygame.K_LEFT:
+                    left_motor = -speed
+                    right_motor = speed
+                    print("Left pressed.")
+                if event.key = pygame.K_RIGHT:
+                    left_motor = speed
+                    right_motor = -speed
+                    print("Right pressed.")
+                if event.key = pygame.K_UP:
+                    left_motor = speed
+                    right_motor = speed
+                    print("Up pressed.")
+                if event.key = pygame.K_DOWN:
+                    left_motor = -speed
+                    right_motor = -speed
+                    print("Down pressed.")
+                if event.key = pygame.K_SPACE:
+                    left_motor = 0
+                    right_motor = 0
+                    print("Space pressed.")
+
+                if event.key = pygame.K_z:
+                    waving_pub.publish(True)
+                    print("Start waving!")
+                if event.key = pygame.K_x:
+                    waving_pub.publish(False)
+                    print("Stop waving!")
+                if event.key = pygame.K_q:
+                    pygame.quit()
+                    sys.exit()
+
 
         motor_pub.publish(Vector3(left_motor, right_motor, 0))
         rate.sleep()
