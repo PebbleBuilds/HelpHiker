@@ -34,34 +34,34 @@ def main():
                 sys.exit()
 
             if event.type == pygame.KEYDOWN:
-                if event.key = pygame.K_LEFT:
+                if event.key == pygame.K_LEFT:
                     left_motor = -speed
                     right_motor = speed
                     print("Left pressed.")
-                if event.key = pygame.K_RIGHT:
+                if event.key == pygame.K_RIGHT:
                     left_motor = speed
                     right_motor = -speed
                     print("Right pressed.")
-                if event.key = pygame.K_UP:
+                if event.key == pygame.K_UP:
                     left_motor = speed
                     right_motor = speed
                     print("Up pressed.")
-                if event.key = pygame.K_DOWN:
+                if event.key == pygame.K_DOWN:
                     left_motor = -speed
                     right_motor = -speed
                     print("Down pressed.")
-                if event.key = pygame.K_SPACE:
+                if event.key == pygame.K_SPACE:
                     left_motor = 0
                     right_motor = 0
                     print("Space pressed.")
 
-                if event.key = pygame.K_z:
+                if event.key == pygame.K_z:
                     waving_pub.publish(True)
                     print("Start waving!")
-                if event.key = pygame.K_x:
+                if event.key == pygame.K_x:
                     waving_pub.publish(False)
                     print("Stop waving!")
-                if event.key = pygame.K_q:
+                if event.key == pygame.K_q:
                     pygame.quit()
                     sys.exit()
 
