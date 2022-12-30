@@ -38,22 +38,27 @@ def main():
                     left_motor = -speed
                     right_motor = speed
                     print("Left pressed.")
+                    motor_pub.publish(Vector3(left_motor, right_motor, 0))
                 if event.key == pygame.K_RIGHT:
                     left_motor = speed
                     right_motor = -speed
                     print("Right pressed.")
+                    motor_pub.publish(Vector3(left_motor, right_motor, 0))
                 if event.key == pygame.K_UP:
                     left_motor = speed
                     right_motor = speed
                     print("Up pressed.")
+                    motor_pub.publish(Vector3(left_motor, right_motor, 0))
                 if event.key == pygame.K_DOWN:
                     left_motor = -speed
                     right_motor = -speed
                     print("Down pressed.")
+                    motor_pub.publish(Vector3(left_motor, right_motor, 0))
                 if event.key == pygame.K_SPACE:
                     left_motor = 0
                     right_motor = 0
                     print("Space pressed.")
+                    motor_pub.publish(Vector3(left_motor, right_motor, 0))
 
                 if event.key == pygame.K_z:
                     waving_pub.publish(True)
@@ -64,9 +69,6 @@ def main():
                 if event.key == pygame.K_q:
                     pygame.quit()
                     sys.exit()
-
-
-        motor_pub.publish(Vector3(left_motor, right_motor, 0))
         rate.sleep()
 
 
