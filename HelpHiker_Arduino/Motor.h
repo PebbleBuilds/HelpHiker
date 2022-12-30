@@ -15,6 +15,9 @@ class Motor
         {
             pinMode(m_iPin1, OUTPUT);
             pinMode(m_iPin2, OUTPUT);
+
+            analogWrite(m_iPin1, 0);
+            analogWrite(m_iPin2, 0);
         }
 
         void Write(int iValue)
