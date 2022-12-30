@@ -17,6 +17,7 @@ def main():
     pygame.init()
     pygame.display.init()
     pygame.event.set_grab(True)
+    pygame.key.set_repeat(25)
 
     # ROS stuff
     motor_pub = rospy.Publisher('motors', Vector3, queue_size=10)
