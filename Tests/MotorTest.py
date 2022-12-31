@@ -14,10 +14,10 @@ def main():
     
     # creating a running loop
     while not rospy.is_shutdown():
-        motor_pub.publish(Vector3(speed, -speed, 0))
+        motor_pub.publish(Vector3(speed, speed, 0))
         waving_pub.publish(True)
         time.sleep(5)
-        motor_pub.publish(Vector3(-speed, speed, 0))
+        motor_pub.publish(Vector3(-speed, -speed, 0))
         waving_pub.publish(False)
         time.sleep(5)
 
