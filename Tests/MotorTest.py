@@ -5,7 +5,7 @@ import time
 
 def main():
     # define internal variables
-    speed = 255
+    speed = 100
 
     # ROS stuff
     motor_pub = rospy.Publisher('motors', Vector3, queue_size=10)
