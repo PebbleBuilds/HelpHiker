@@ -56,6 +56,7 @@ ros::Subscriber<std_msgs::Empty> sub_toggle_led("toggle_led", &toggle_led_cb);
 
 void driver_waving_cb( const std_msgs::Bool& driver_waving_msg){
     bWavingArms = driver_waving_msg.data;
+    nh.loginfo("Waving toggled!");
 }
 ros::Subscriber<std_msgs::Bool> sub_driver_waving("driver_waving", &driver_waving_cb);
 
@@ -66,7 +67,7 @@ void motors_cb( const geometry_msgs::Vector3& motor_msg){
     msg += motor_msg.x;
     msg += " ";
     msg += motor_msg.y;
-    nh.logdebug(msg.c_str());
+    nh.loginfo(msg.c_str());
 }
 ros::Subscriber<geometry_msgs::Vector3> sub_motors("motors", &motors_cb);
 

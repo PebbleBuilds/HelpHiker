@@ -5,7 +5,7 @@ import time
 
 def main():
     # define internal variables
-    speed = 100
+    speed = 255
 
     # ROS stuff
     motor_pub = rospy.Publisher('motors', Vector3, queue_size=10)
@@ -17,7 +17,7 @@ def main():
         motor_pub.publish(Vector3(speed, -speed, 0))
         waving_pub.publish(True)
         time.sleep(5)
-        motor_pub.publish(Vector3(0, 0, 0))
+        motor_pub.publish(Vector3(-speed, speed, 0))
         waving_pub.publish(False)
         time.sleep(5)
 
