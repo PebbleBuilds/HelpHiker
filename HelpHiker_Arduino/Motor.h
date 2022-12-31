@@ -1,3 +1,6 @@
+#ifndef HELPHIKER_MOTORS
+#define HELPHIKER_MOTORS
+
 #include <Arduino.h>
 #include <math.h>
 
@@ -32,3 +35,5 @@ class Motor
             }
         }
 };
+
+#endif

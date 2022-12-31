@@ -44,6 +44,10 @@ Motor motor2(c_iMotor2Pin1, c_iMotor2Pin2);
 // Define ros node
 ros::NodeHandle nh;
 
+// Initialize publishers
+std_msgs::String chatter_msg;
+ros::Publisher chatter("chatter", &chatter_msg);
+
 // ros subscriber callbacks and initializations
 void toggle_led_cb( const std_msgs::Empty& toggle_led_msg){
     digitalWrite(LED_BUILTIN, HIGH-digitalRead(13));   // blink the led
@@ -58,13 +62,13 @@ ros::Subscriber<std_msgs::Bool> sub_driver_waving("driver_waving", &driver_wavin
 void motors_cb( const geometry_msgs::Vector3& motor_msg){
     motor1.Write(motor_msg.x);
     motor2.Write(motor_msg.y);
+    String msg = "Received motor speeds:";
+    msg += motor_msg.x;
+    msg += " ";
+    msg += motor_msg.y;
+    nh.logdebug(msg.c_str());
 }
 ros::Subscriber<geometry_msgs::Vector3> sub_motors("motors", &motors_cb);
-
-// Initialize publishers
-std_msgs::String chatter_msg;
-ros::Publisher chatter("chatter", &chatter_msg);
-char hello[13] = "hello world!";
 
 /////////////////////////////
 // Setup!
@@ -95,8 +99,6 @@ void setup()
 /////////////////////////////
 void loop()
 {
-    chatter_msg.data = hello;
-    chatter.publish( &chatter_msg );
     nh.spinOnce();
     delay(1);
 

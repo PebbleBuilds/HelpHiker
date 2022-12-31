@@ -1,3 +1,6 @@
+#ifndef HELPHIKER_SWEEPER
+#define HELPHIKER_SWEEPER
+
 #include <Arduino.h>
 #include <Servo.h> 
 
@@ -43,3 +46,5 @@ public:
     }
   }
 };
+
+#endif
