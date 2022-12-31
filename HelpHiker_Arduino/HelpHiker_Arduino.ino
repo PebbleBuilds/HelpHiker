@@ -49,11 +49,6 @@ std_msgs::String chatter_msg;
 ros::Publisher chatter("chatter", &chatter_msg);
 
 // ros subscriber callbacks and initializations
-void toggle_led_cb( const std_msgs::Empty& toggle_led_msg){
-    digitalWrite(LED_BUILTIN, HIGH-digitalRead(13));   // blink the led
-}
-ros::Subscriber<std_msgs::Empty> sub_toggle_led("toggle_led", &toggle_led_cb);
-
 void driver_waving_cb( const std_msgs::Bool& driver_waving_msg){
     bWavingArms = driver_waving_msg.data;
     nh.loginfo("Waving toggled!");
@@ -61,12 +56,12 @@ void driver_waving_cb( const std_msgs::Bool& driver_waving_msg){
 ros::Subscriber<std_msgs::Bool> sub_driver_waving("driver_waving", &driver_waving_cb);
 
 void motors_cb( const geometry_msgs::Vector3& motor_msg){
-    motor1.Write(motor_msg.x);
-    motor2.Write(motor_msg.y);
+    motor1.Write(int(motor_msg.x));
+    motor2.Write(int(motor_msg.y));
     String msg = "Received motor speeds:";
-    msg += motor_msg.x;
+    msg += int(motor_msg.x);
     msg += " ";
-    msg += motor_msg.y;
+    msg += int(motor_msg.y);
     nh.loginfo(msg.c_str());
 }
 ros::Subscriber<geometry_msgs::Vector3> sub_motors("motors", &motors_cb);
@@ -80,16 +75,14 @@ void setup()
     nh.initNode();
     nh.advertise(chatter);
 
-    // Toggle LED
-    pinMode(LED_BUILTIN, OUTPUT);
-    nh.subscribe(sub_toggle_led);
-
     // Servos
     servo1.Attach(c_iServo1Pin);
     servo2.Attach(c_iServo2Pin);
     nh.subscribe(sub_driver_waving);
 
     // Motors
+    pinMode(12,OUTPUT);
+    digitalWrite(12,LOW);
     motor1.Setup();
     motor2.Setup();
     nh.subscribe(sub_motors);
