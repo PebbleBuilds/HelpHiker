@@ -1,16 +1,17 @@
 #!/usr/bin/env python
 from flask import Flask, render_template, Response
-#import picamera
+import picamera
 import cv2
 import socket
 import io
 
 app = Flask(__name__)
-vc = cv2.VideoCapture('/dev/video0', cv2.CAP_V4L)
+vc = cv2.VideoCapture(0)
+#vc = cv2.VideoCapture('/dev/video0', cv2.CAP_V4L)
 
 # set dimensions
-vc.set(cv2.CAP_PROP_FRAME_WIDTH, 2560)
-vc.set(cv2.CAP_PROP_FRAME_HEIGHT, 1440)
+#vc.set(cv2.CAP_PROP_FRAME_WIDTH, 2560)
+#vc.set(cv2.CAP_PROP_FRAME_HEIGHT, 1440)
 
 
 @app.route('/')
