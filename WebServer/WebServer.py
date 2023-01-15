@@ -6,7 +6,7 @@ import socket
 import io
 
 app = Flask(__name__)
-vc = cv2.VideoCapture('/dev/video0', cv2.CAP_V4L)
+vc = cv2.VideoCapture(0)
 
 # set dimensions
 #vc.set(cv2.CAP_PROP_FRAME_WIDTH, 2560)
