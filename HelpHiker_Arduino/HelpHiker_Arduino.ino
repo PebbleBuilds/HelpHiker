@@ -9,10 +9,10 @@
 #include "Motor.h"
 
 // Pinouts
-// Servo 1: D5
-// Servo 2: D6 
-// Motor 1: D11 and D10
-// Motor 2: D9 and D3
+// Servo 1: D5 (PWM)
+// Servo 2: D6 (PWM)
+// Motor 1: D3 (PWM enable) and D2 + D4 (dir)
+// Motor 2: D9 (PWM enable) and D8 + D7 (dir)
 
 /////////////////////////////
 // Define internal variables
@@ -28,13 +28,16 @@ Sweeper servo1(c_iServoUpdateInterval, 1, 0);
 Sweeper servo2(c_iServoUpdateInterval, -1, 180);
 
 // Drive motors
-int c_iMotor1Pin1 = 11;
-int c_iMotor1Pin2 = 10;
-int c_iMotor2Pin1 = 9;
-int c_iMotor2Pin2 = 3;
+int c_iMotor1Pin1 = 2;
+int c_iMotor1Pin2 = 4;
+int c_iMotor1PinEnable = 3;
 
-Motor motor1(c_iMotor1Pin1, c_iMotor1Pin2);
-Motor motor2(c_iMotor2Pin1, c_iMotor2Pin2);
+int c_iMotor2Pin1 = 8;
+int c_iMotor2Pin2 = 7;
+int c_iMotor2PinEnable = 9;
+
+Motor motor1(c_iMotor1Pin1, c_iMotor1Pin2, c_iMotor1PinEnable);
+Motor motor2(c_iMotor2Pin1, c_iMotor2Pin2, c_iMotor2PinEnable);
 
 
 /////////////////////////////
