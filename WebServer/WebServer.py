@@ -24,12 +24,12 @@ def robot_stop():
 
 def robot_travel(forward):
     if forward:
-	    rospy.loginfo("Webserver fwd pressed")
+        rospy.loginfo("Webserver fwd pressed")
     else:
         rospy.loginfo("Webserver back pressed")
 
 def robot_turn(clockwise):
-	if clockwise:
+    if clockwise:
         rospy.loginfo("Webserver right pressed")
     else:
         rospy.loginfo("Webserver left pressed")
@@ -59,28 +59,28 @@ def video_feed():
 
 @app.route("/forward", methods=['GET', 'POST'])
 def forward():
-	robot_travel(True)
-	return ('', 204)
+    robot_travel(True)
+    return ('', 204)
 
 @app.route("/backward", methods=['GET', 'POST'])
 def backward():
-	robot_travel(False)
-	return ('', 204)
+    robot_travel(False)
+    return ('', 204)
 
 @app.route("/turnRight", methods=['GET', 'POST'])
 def turn_right():
-	robot_turn(True)
-	return ('', 204)
+    robot_turn(True)
+    return ('', 204)
 
 @app.route("/turnLeft", methods=['GET', 'POST'])
 def turn_left():
-	robot_turn(False)
-	return ('', 204)
+    robot_turn(False)
+    return ('', 204)
 
 @app.route("/stop", methods=['GET', 'POST'])
 def stop():
-	robot_stop()
-	return ('', 204)
+    robot_stop()
+    return ('', 204)
 
 
 if __name__ == '__main__':
