@@ -4,6 +4,7 @@ from flask import Flask, render_template, Response
 import cv2
 import socket
 import io
+import rospy
 
 app = Flask(__name__)
 vc = cv2.VideoCapture(-1)
@@ -36,6 +37,31 @@ def video_feed():
     """Video streaming route. Put this in the src attribute of an img tag."""
     return Response(gen(),
                     mimetype='multipart/x-mixed-replace; boundary=frame')
+
+@app.route("/forward", methods=['GET', 'POST'])
+def forward():
+	robot_travel(True)
+	return ('', 204)
+
+@app.route("/backward", methods=['GET', 'POST'])
+def backward():
+	robot_travel(False)
+	return ('', 204)
+
+@app.route("/turnRight", methods=['GET', 'POST'])
+def turn_right():
+	robot_turn(True)
+	return ('', 204)
+
+@app.route("/turnLeft", methods=['GET', 'POST'])
+def turn_left():
+	robot_turn(False)
+	return ('', 204)
+
+@app.route("/stop", methods=['GET', 'POST'])
+def stop():
+	robot_stop()
+	return ('', 204)
 
 
 if __name__ == '__main__':
