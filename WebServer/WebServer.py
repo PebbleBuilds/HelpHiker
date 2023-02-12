@@ -16,7 +16,6 @@ app = Flask(__name__)
 vc = cv2.VideoCapture(-1)
 rospy.init_node("WebServer",anonymous=True)
 motor_pub = rospy.Publisher('motors', Vector3, queue_size=10)
-stop()
 
 # set dimensions
 #vc.set(cv2.CAP_PROP_FRAME_WIDTH, 2560)
@@ -92,6 +91,6 @@ def stop():
 
 
 if __name__ == '__main__':
-		setup_ros()
+		robot_stop()
 		app.run(host='0.0.0.0', debug=False, threaded=True)
 			   
