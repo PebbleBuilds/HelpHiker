@@ -25,7 +25,7 @@ class Motor
 
         void Write(int iValue)
         {
-            if(iValue < 0){
+            if(iValue > 0){
                 analogWrite(m_iPin1, iValue);
                 analogWrite(m_iPin2, 0);
             }
