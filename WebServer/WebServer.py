@@ -4,35 +4,43 @@ from flask import Flask, render_template, Response
 import cv2
 import socket
 import io
+
 import rospy
+from std_msgs.msg import Bool
+from geometry_msgs.msg import Vector3
+
+ROBOT_LINEAR_SPEED = 100
+ROBOT_ANGULAR_SPEED = 50
 
 app = Flask(__name__)
 vc = cv2.VideoCapture(-1)
+rospy.init_node("WebServer",anonymous=True)
+motor_pub = rospy.Publisher('motors', Vector3, queue_size=10)
+stop()
 
 # set dimensions
 #vc.set(cv2.CAP_PROP_FRAME_WIDTH, 2560)
 #vc.set(cv2.CAP_PROP_FRAME_HEIGHT, 1440)
 
-def setup_ros():
-    # motor_pub = rospy.Publisher('motors', Vector3, queue_size=10)
-    # waving_pub = rospy.Publisher('driver_waving', Bool, queue_size=10)
-	rospy.init_node("WebServer",anonymous=True)
-	stop()
-
 def robot_stop():
 	rospy.loginfo("Webserver stop pressed")
+    motor_pub.publish(Vector3(0, 0, 0))
 
 def robot_travel(forward):
     if forward:
         rospy.loginfo("Webserver fwd pressed")
+        motor_pub.publish(Vector3(ROBOT_LINEAR_SPEED, ROBOT_LINEAR_SPEED, 0))
     else:
         rospy.loginfo("Webserver back pressed")
+        motor_pub.publish(Vector3(-ROBOT_LINEAR_SPEED, -ROBOT_LINEAR_SPEED, 0))
 
 def robot_turn(clockwise):
     if clockwise:
         rospy.loginfo("Webserver right pressed")
+        motor_pub.publish(Vector3(ROBOT_ANGULAR_SPEED, -ROBOT_ANGULAR_SPEED, 0))
     else:
         rospy.loginfo("Webserver left pressed")
+        motor_pub.publish(Vector3(-ROBOT_ANGULAR_SPEED, ROBOT_ANGULAR_SPEED, 0))
 
 @app.route('/')
 def index():
@@ -84,5 +92,6 @@ def stop():
 
 
 if __name__ == '__main__':
+        setup_ros()
         app.run(host='0.0.0.0', debug=False, threaded=True)
                
