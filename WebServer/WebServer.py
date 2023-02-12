@@ -13,6 +13,26 @@ vc = cv2.VideoCapture(-1)
 #vc.set(cv2.CAP_PROP_FRAME_WIDTH, 2560)
 #vc.set(cv2.CAP_PROP_FRAME_HEIGHT, 1440)
 
+def setup_ros():
+    # motor_pub = rospy.Publisher('motors', Vector3, queue_size=10)
+    # waving_pub = rospy.Publisher('driver_waving', Bool, queue_size=10)
+	rospy.init_node("WebServer",anonymous=True)
+	stop()
+
+def robot_stop():
+	rospy.loginfo("Webserver stop pressed")
+
+def robot_travel(forward):
+    if forward:
+	    rospy.loginfo("Webserver fwd pressed")
+    else:
+        rospy.loginfo("Webserver back pressed")
+
+def robot_turn(clockwise):
+	if clockwise:
+        rospy.loginfo("Webserver right pressed")
+    else:
+        rospy.loginfo("Webserver left pressed")
 
 @app.route('/')
 def index():
@@ -30,7 +50,6 @@ def gen():
         cv2.imwrite('t.jpg', frame)
         yield (b'--frame\r\n'
                b'Content-Type: image/jpeg\r\n\r\n' + open('t.jpg', 'rb').read() + b'\r\n')
-
 
 @app.route('/video_feed')
 def video_feed():
