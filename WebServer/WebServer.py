@@ -9,8 +9,8 @@ import rospy
 from std_msgs.msg import Bool
 from geometry_msgs.msg import Vector3
 
-ROBOT_LINEAR_SPEED = 125
-ROBOT_ANGULAR_SPEED = 125
+ROBOT_LINEAR_SPEED = 111
+ROBOT_ANGULAR_SPEED = 111
 
 app = Flask(__name__)
 vc = cv2.VideoCapture(-1)
@@ -36,10 +36,10 @@ def robot_travel(forward):
 def robot_turn(clockwise):
 	if clockwise:
 		rospy.loginfo("Webserver right pressed")
-		motor_pub.publish(Vector3(ROBOT_ANGULAR_SPEED, -ROBOT_ANGULAR_SPEED, 0))
+		motor_pub.publish(Vector3(-ROBOT_ANGULAR_SPEED, ROBOT_ANGULAR_SPEED, 0))
 	else:
 		rospy.loginfo("Webserver left pressed")
-		motor_pub.publish(Vector3(-ROBOT_ANGULAR_SPEED, ROBOT_ANGULAR_SPEED, 0))
+		motor_pub.publish(Vector3(ROBOT_ANGULAR_SPEED, -ROBOT_ANGULAR_SPEED, 0))
 
 @app.route('/')
 def index():
