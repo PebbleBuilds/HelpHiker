@@ -19,18 +19,18 @@ class Motor
             pinMode(m_iPin1, OUTPUT);
             pinMode(m_iPin2, OUTPUT);
 
-            digitalWrite(m_iPin1, 0);
-            digitalWrite(m_iPin2, 0);
+            analogWrite(m_iPin1, 0);
+            analogWrite(m_iPin2, 0);
         }
 
         void Write(int iValue)
         {
             if(iValue > 0){
                 analogWrite(m_iPin1, iValue);
-                digitalWrite(m_iPin2, 0);
+                analogWrite(m_iPin2, 0);
             }
             else{
-                digitalWrite(m_iPin1, 0);
+                analogWrite(m_iPin1, 0);
                 analogWrite(m_iPin2, -iValue);
             }
         }
