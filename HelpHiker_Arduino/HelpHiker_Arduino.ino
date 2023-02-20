@@ -28,16 +28,13 @@ Sweeper servo1(c_iServoUpdateInterval, 1, 0);
 Sweeper servo2(c_iServoUpdateInterval, -1, 180);
 
 // Drive motors
-int c_iMotor1Pin1 = 2;
-int c_iMotor1Pin2 = 4;
-int c_iMotor1PinEnable = 3;
+int c_iMotor1Pin1 = 11;
+int c_iMotor1Pin2 = 10;
+int c_iMotor2Pin1 = 9;
+int c_iMotor2Pin2 = 3;
 
-int c_iMotor2Pin1 = 8;
-int c_iMotor2Pin2 = 7;
-int c_iMotor2PinEnable = 9;
-
-Motor motor1(c_iMotor1Pin1, c_iMotor1Pin2, c_iMotor1PinEnable);
-Motor motor2(c_iMotor2Pin1, c_iMotor2Pin2, c_iMotor2PinEnable);
+Motor motor1(c_iMotor1Pin1, c_iMotor1Pin2);
+Motor motor2(c_iMotor2Pin1, c_iMotor2Pin2);
 
 
 /////////////////////////////
@@ -84,8 +81,6 @@ void setup()
     nh.subscribe(sub_driver_waving);
 
     // Motors
-    pinMode(12,OUTPUT);
-    digitalWrite(12,LOW);
     motor1.Setup();
     motor2.Setup();
     nh.subscribe(sub_motors);
