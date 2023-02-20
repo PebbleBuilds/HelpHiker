@@ -9,8 +9,8 @@ import rospy
 from std_msgs.msg import Bool
 from geometry_msgs.msg import Vector3
 
-SPEED_1 = 128
-SPEED_2 = 128
+SPEED_1 = 255
+SPEED_2 = 255
 
 app = Flask(__name__)
 vc = cv2.VideoCapture(-1)
