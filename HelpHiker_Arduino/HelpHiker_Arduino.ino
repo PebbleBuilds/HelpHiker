@@ -34,7 +34,7 @@ int c_iMotor1PinEnable = 3;
 
 int c_iMotor2Pin1 = 8;
 int c_iMotor2Pin2 = 7;
-int c_iMotor2PinEnable = 9;
+int c_iMotor2PinEnable = 11;
 
 Motor motor1(c_iMotor1Pin1, c_iMotor1Pin2, c_iMotor1PinEnable);
 Motor motor2(c_iMotor2Pin1, c_iMotor2Pin2, c_iMotor2PinEnable);
