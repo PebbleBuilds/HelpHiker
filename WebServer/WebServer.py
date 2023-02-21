@@ -52,6 +52,7 @@ def gen():
 		if not vc.isOpened():
 			print("vc not open")
 		rval, frame = vc.read()
+		frame = cv2.flip(frame,-1)
 		if not rval:
 			print("read failed")
 		cv2.imwrite('t.jpg', frame)
