@@ -28,6 +28,11 @@
 					e.stopPropagation();
 			}
 
+			function wave(e) {
+					$.post("wave");
+					e.stopPropagation();
+			}
+
 			function makeControl(domElementId) {
 				$(domElementId).bind(startPressEvent, move).bind(stopPressEvent, stop);
 			}
@@ -37,6 +42,8 @@
 				makeControl("#backward");
 				makeControl("#turnLeft");
 				makeControl("#turnRight");
+				makeControl("#stop");
+				makeControl("#wave");
 			});
 		</script>
   </head>
@@ -47,5 +54,7 @@
 		<p id="backward">Backward</p>
 		<p id="turnLeft">Turn Left</p>
 		<p id="turnRight">Turn Right</p>
+		<p id="stop">Stop</p>
+		<p id="wave">Toggle Wave</p>
   </body>
 </html>

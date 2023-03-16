@@ -11,11 +11,13 @@ from geometry_msgs.msg import Vector3
 
 SPEED_1 = 50
 SPEED_2 = 50
+waving = False
 
 app = Flask(__name__)
 vc = cv2.VideoCapture(-1)
 rospy.init_node("WebServer",anonymous=True)
 motor_pub = rospy.Publisher('motors', Vector3, queue_size=10)
+waving_pub = rospy.Publisher('driver_waving', Bool, queue_size=10)
 
 # set dimensions
 #vc.set(cv2.CAP_PROP_FRAME_WIDTH, 2560)
@@ -40,6 +42,14 @@ def robot_turn(clockwise):
 	else:
 		rospy.loginfo("Webserver left pressed")
 		motor_pub.publish(Vector3(-SPEED_1, SPEED_2, 0))
+
+def robot_wave():
+	rospy.loginfo("Webserver wave pressed")
+	if waving:
+		waving = False
+	else:
+		waving = True
+	waving_pub.publish(Bool(waving))
 
 @app.route('/')
 def index():
@@ -88,6 +98,11 @@ def turn_left():
 @app.route("/stop", methods=['GET', 'POST'])
 def stop():
 	robot_stop()
+	return ('', 204)
+
+@app.route("/wave", methods=['GET', 'POST'])
+def wave():
+	robot_wave()
 	return ('', 204)
 
 
