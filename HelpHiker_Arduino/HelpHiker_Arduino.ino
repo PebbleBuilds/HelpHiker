@@ -21,11 +21,11 @@
 // Servo arms
 bool bWavingArms = false;
 int iServo1Angle = 0;
-int c_iServoUpdateInterval = 50; // in ms
+int c_iServoUpdateInterval = 20; // in ms
 int c_iServo1Pin = 5;
-int c_iServo2Pin = 6;
-Sweeper servo1(c_iServoUpdateInterval, 1, 0);
-Sweeper servo2(c_iServoUpdateInterval, -1, 180);
+//int c_iServo2Pin = 6;
+Sweeper servo1(c_iServoUpdateInterval, 1, 90, 0, 100);
+//Sweeper servo2(c_iServoUpdateInterval, 1, 90, 0, 100);
 
 // Drive motors
 int c_iMotor1Pin1 = 2;
@@ -100,6 +100,6 @@ void loop()
     if(bWavingArms)
     {
         servo1.Update();
-        servo2.Update();
+        //servo2.Update();
     }
 }

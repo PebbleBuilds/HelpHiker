@@ -11,13 +11,16 @@ class Sweeper
   int increment;        // increment to move for each interval
   int  updateInterval;      // interval between updates
   unsigned long lastUpdate; // last update of position
+  int m_iMinPos, m_iMaxPos;
 
 public: 
-  Sweeper(int interval, int start_increment, int start_pos)
+  Sweeper(int interval, int start_increment, int start_pos, int iMinPos, int iMaxPos)
   {
     updateInterval = interval;
     increment = start_increment;
     pos = start_pos;
+    m_iMinPos = iMinPos;
+    m_iMaxPos = iMaxPos;
   }
   
   void Attach(int pin)
@@ -38,7 +41,7 @@ public:
       pos += increment;
       servo.write(pos);
       Serial.println(pos);
-      if ((pos >= 180) || (pos <= 0)) // end of sweep
+      if ((pos >= m_iMaxPos) || (pos <= m_iMinPos)) // end of sweep
       {
         // reverse direction
         increment = -increment;
