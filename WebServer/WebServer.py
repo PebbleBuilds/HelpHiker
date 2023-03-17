@@ -49,7 +49,7 @@ def robot_wave():
 		waving = False
 	else:
 		waving = True
-	waving_pub.publish(Bool(waving))
+	waving_pub.publish(Bool(True))
 
 @app.route('/')
 def index():
