@@ -26,6 +26,7 @@ rospy.init_node("WebServer",anonymous=True)
 def robot_stop():
 	rospy.loginfo("Webserver stop pressed")
 	motor_pub.publish(Vector3(0, 0, 0))
+	waving_pub.publish(Bool(False))
 
 def robot_travel(forward):
 	if forward:
