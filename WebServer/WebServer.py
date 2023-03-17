@@ -45,10 +45,6 @@ def robot_turn(clockwise):
 
 def robot_wave():
 	rospy.loginfo("Webserver wave pressed")
-	if waving:
-		waving = False
-	else:
-		waving = True
 	waving_pub.publish(Bool(True))
 	rospy.loginfo("I finished")
 
