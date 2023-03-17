@@ -47,7 +47,6 @@ def robot_turn(clockwise):
 def robot_wave():
 	rospy.loginfo("Webserver wave pressed")
 	waving_pub.publish(Bool(True))
-	rospy.loginfo("I finished")
 
 @app.route('/')
 def index():
