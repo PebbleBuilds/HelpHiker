@@ -15,9 +15,9 @@ waving = False
 
 app = Flask(__name__)
 vc = cv2.VideoCapture(-1)
-rospy.init_node("WebServer",anonymous=True)
 motor_pub = rospy.Publisher('motors', Vector3, queue_size=10)
 waving_pub = rospy.Publisher('driver_waving', Bool, queue_size=10)
+rospy.init_node("WebServer",anonymous=True)
 
 # set dimensions
 #vc.set(cv2.CAP_PROP_FRAME_WIDTH, 2560)
@@ -49,7 +49,7 @@ def robot_wave():
 		waving = False
 	else:
 		waving = True
-	waving_pub.publish(waving)
+	waving_pub.publish(Bool(waving))
 
 @app.route('/')
 def index():
