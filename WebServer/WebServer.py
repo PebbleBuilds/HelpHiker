@@ -50,6 +50,7 @@ def robot_wave():
 	else:
 		waving = True
 	waving_pub.publish(Bool(True))
+	rospy.loginfo("I finished")
 
 @app.route('/')
 def index():
